@@ -3,9 +3,11 @@ package tmpl
 import (
 	"io/ioutil"
 	"os"
+	"os/exec"
 	"text/template"
 
 	"github.com/ericaro/frontmatter"
+	"github.com/google/shlex"
 
 	"github.com/the-maldridge/emissary/pkg/secret"
 )
@@ -53,5 +55,18 @@ func (t *Tmpl) Render() error {
 	if err := t.Template.Execute(f, nil); err != nil {
 		return err
 	}
+
+	if t.OnRender != "" {
+		cmd, err := shlex.Split(t.OnRender)
+		if err != nil {
+			return err
+		}
+		// Run whatever command was supposed to happen after
+		// the template was rendered out.
+		if err := exec.Command(cmd[0], cmd[1:]...).Run(); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
