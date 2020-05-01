@@ -45,7 +45,7 @@ func Parse(f string) (*Tmpl, error) {
 // Render spits out the contents of the template and renders it to a
 // file on disk.
 func (t *Tmpl) Render() error {
-	f, err := os.OpenFile(t.Dest, os.O_RDWR|os.O_CREATE, t.Mode)
+	f, err := os.OpenFile(t.Dest, os.O_RDWR|os.O_CREATE|os.O_TRUNC, t.Mode)
 	if err != nil {
 		return err
 	}
