@@ -12,5 +12,9 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	fmt.Printf("%v\n", t)
+
+	if err := t.Render(); err != nil {
+		fmt.Println(err)
+		return
+	}
 }
