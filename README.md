@@ -9,7 +9,11 @@ to write out the secret data to files.
 ## Templates
 
 Emissary uses templates with YAML front matter to control where
-secrets are written.  An example of a template is shown below:
+secrets are written.  Templates will be loaded from either the current
+working directory, or from the path referred to by
+`EMISSARY_BASE_PATH`, and must satisfy the glob pattern `*.tpl`.
+
+An example of a template is shown below:
 
 ```
 ---
