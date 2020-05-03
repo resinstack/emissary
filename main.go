@@ -10,6 +10,7 @@ import (
 	"github.com/the-maldridge/emissary/pkg/secret"
 	"github.com/the-maldridge/emissary/pkg/tmpl"
 
+	_ "github.com/the-maldridge/emissary/pkg/secret/awssm"
 	_ "github.com/the-maldridge/emissary/pkg/secret/insecure"
 )
 

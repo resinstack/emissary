@@ -68,3 +68,7 @@ of Emissary.
     for secrets.  It makes requests of the form `$INSECURE_BASE/<id>`
     where `$INSECURE_BASE` is an environment variable containing the
     base URL of the server to query.
+  * `awssm`: Fetches secrets from the AWS Secrets Manager.
+    Credentials are loaded from the normal locations for the AWS SDK,
+    and the region can be deduced from a running EC2 instance if
+    applicable.

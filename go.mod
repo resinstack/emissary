@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/antonholmquist/jason v1.0.0 // indirect
+	github.com/aws/aws-sdk-go v1.30.19
 	github.com/ddo/pick-json v0.0.0-20170207095303-c8760e09e0fe // indirect
 	github.com/ddo/rq v0.0.0-20190828174524-b3daa55fcaba
 	github.com/ericaro/frontmatter v0.0.0-20200210094738-46863cd917e2
