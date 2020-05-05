@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -20,14 +19,15 @@ func doTemplate(path string, wg *sync.WaitGroup) {
 
 	t, err := tmpl.Parse(path)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, err.Error())
+		log.Printf("Error parsing template at %s: %s", path, err)
 		return
 	}
 
 	if err := t.Render(); err != nil {
-		fmt.Fprintf(os.Stderr, err.Error())
+		log.Printf("Error rendering template at %s: %s", path, err)
 		return
 	}
+	log.Printf("Template worker for", path, "is terminating.")
 }
 
 func main() {
@@ -50,4 +50,6 @@ func main() {
 		go doTemplate(t, &wg)
 	}
 	wg.Wait()
+	log.Println("All template workers terminated")
+	log.Println("Emissary is shutting down")
 }

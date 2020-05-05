@@ -1,6 +1,7 @@
 package tmpl
 
 import (
+	"log"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -63,9 +64,12 @@ func (t *Tmpl) Render() error {
 		}
 		// Run whatever command was supposed to happen after
 		// the template was rendered out.
-		if err := exec.Command(cmd[0], cmd[1:]...).Run(); err != nil {
+		out, err := exec.Command(cmd[0], cmd[1:]...).CombinedOutput()
+		if err != nil {
+			log.Printf("Error running command: %s", err)
 			return err
 		}
+		log.Printf("Output from OnRender for %s: %s", t.Dest, string(out))
 	}
 
 	return nil
