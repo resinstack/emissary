@@ -60,5 +60,6 @@ func (a *awssm) FetchSecret(id string) (string, error) {
 		return "", secret.ErrNotFound
 	}
 
+	log.Printf("Secret %s aquired", id)
 	return *output.SecretString, nil
 }

@@ -1,8 +1,8 @@
 package tmpl
 
 import (
-	"log"
 	"io/ioutil"
+	"log"
 	"os"
 	"os/exec"
 	"text/template"

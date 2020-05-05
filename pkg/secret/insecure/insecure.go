@@ -26,12 +26,12 @@ func initialize() (secret.Provider, error) {
 	i := new(insecure)
 	base := os.Getenv("INSECURE_BASE")
 	if base == "" {
-		return nil, errors.New("required variable INSECURE_BASE not set")
+		return nil, errors.New("required variable INSECURE_BASE not set, insecure engine will be unavailable")
 	}
 	var err error
 	i.base, err = url.Parse(base)
 	if err != nil {
-		return nil, errors.New("INSECURE_BASE does not container a URL")
+		return nil, errors.New("INSECURE_BASE does not container a URL, insecure engine will be unavailable")
 	}
 	return i, nil
 }

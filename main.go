@@ -27,7 +27,7 @@ func doTemplate(path string, wg *sync.WaitGroup) {
 		log.Printf("Error rendering template at %s: %s", path, err)
 		return
 	}
-	log.Printf("Template worker for", path, "is terminating.")
+	log.Printf("Template worker for %s is terminating.", path)
 }
 
 func main() {
