@@ -3,11 +3,11 @@ package tmpl
 import (
 	"io/ioutil"
 	"log"
-	"os"
 	"os/exec"
 	"text/template"
 
 	"github.com/ericaro/frontmatter"
+	"github.com/google/renameio"
 	"github.com/google/shlex"
 
 	"github.com/the-maldridge/emissary/pkg/secret"
@@ -48,12 +48,20 @@ func Parse(f string) (*Tmpl, error) {
 // Render spits out the contents of the template and renders it to a
 // file on disk.
 func (t *Tmpl) Render() error {
-	f, err := os.OpenFile(t.Dest, os.O_RDWR|os.O_CREATE|os.O_TRUNC, t.Mode)
+	f, err := renameio.TempFile("", t.Dest)
 	if err != nil {
+		return err
+	}
+	defer f.Cleanup()
+
+	if err := f.Chmod(t.Mode); err != nil {
 		return err
 	}
 
 	if err := t.Template.Execute(f, nil); err != nil {
+		return err
+	}
+	if err := f.CloseAtomicallyReplace(); err != nil {
 		return err
 	}
 
@@ -65,11 +73,11 @@ func (t *Tmpl) Render() error {
 		// Run whatever command was supposed to happen after
 		// the template was rendered out.
 		out, err := exec.Command(cmd[0], cmd[1:]...).CombinedOutput()
+		log.Printf("Output from OnRender for %s: %s", t.Dest, string(out))
 		if err != nil {
 			log.Printf("Error running command: %s", err)
 			return err
 		}
-		log.Printf("Output from OnRender for %s: %s", t.Dest, string(out))
 	}
 
 	return nil

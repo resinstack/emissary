@@ -2,6 +2,7 @@ package awssm
 
 import (
 	"log"
+	"strings"
 
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/ec2metadata"
@@ -56,10 +57,11 @@ func (a *awssm) FetchSecret(id string) (string, error) {
 		return "", secret.ErrTerminal
 	}
 
-	if *output.SecretString == "" {
+	scrt := strings.TrimSpace(*output.SecretString)
+	if scrt == "" || scrt == "intentionally-empty" {
 		return "", secret.ErrNotFound
 	}
 
 	log.Printf("Secret %s aquired", id)
-	return *output.SecretString, nil
+	return scrt, nil
 }

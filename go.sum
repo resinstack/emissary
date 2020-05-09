@@ -10,6 +10,7 @@ github.com/ddo/rq v0.0.0-20190828174524-b3daa55fcaba/go.mod h1:XIayI7kdKklkc7yyW
 github.com/ericaro/frontmatter v0.0.0-20200210094738-46863cd917e2 h1:+dzAHE3uQKGtPxobmh43c0n8V8A7X70zqUUDzL7ePVA=
 github.com/ericaro/frontmatter v0.0.0-20200210094738-46863cd917e2/go.mod h1:Xy0DdToffIGb/ZMCwM5zFgIQOrVh0cKvNABpKRJYo1w=
 github.com/go-sql-driver/mysql v1.5.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
+github.com/google/renameio v0.1.0/go.mod h1:KWCgfxg9yswjAJkECMjeO8J8rahYeXnNhOm40UhjYkI=
 github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 h1:El6M4kTTCOh6aBiKaUGG7oYTSPP8MxqL4YI3kZKwcP4=
 github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510/go.mod h1:pupxD2MaaD3pAXIBCelhxNneeOaAeabZDe5s4K6zSpQ=
 github.com/jmespath/go-jmespath v0.3.0 h1:OS12ieG61fsCg5+qLJ+SsW9NicxNkg3b25OyT2yCeUc=
