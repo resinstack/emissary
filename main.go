@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"sync"
+	"time"
 
 	"github.com/the-maldridge/emissary/pkg/secret"
 	"github.com/the-maldridge/emissary/pkg/tmpl"
@@ -30,7 +31,27 @@ func doTemplate(path string, wg *sync.WaitGroup) {
 	log.Printf("Template worker for %s is terminating.", path)
 }
 
+func startupDelay() error {
+	if delay := os.Getenv("EMISSARY_STARTUP_DELAY"); delay != "" {
+		d, err := time.ParseDuration(delay)
+		if err != nil {
+			// This is really the cleanest solution to
+			// just jump out of this case.
+			return err
+		}
+		log.Printf("Initial startup delay of %s", d)
+		time.Sleep(d)
+	}
+	return nil
+}
+
 func main() {
+	log.Println("Emissary is starting")
+	if err := startupDelay(); err != nil {
+		log.Printf("Startup delay error: %s", err)
+	}
+	log.Println("Startup delay phase is complete")
+
 	secret.InitializeProviders()
 
 	basepath := os.Getenv("EMISSARY_TPL_DIR")
