@@ -11,7 +11,7 @@ import (
 	"github.com/ddo/rq"
 	"github.com/ddo/rq/client"
 
-	"github.com/the-maldridge/emissary/pkg/secret"
+	"github.com/resinstack/emissary/pkg/secret"
 )
 
 type insecure struct {

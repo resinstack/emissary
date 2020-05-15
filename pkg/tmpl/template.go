@@ -10,7 +10,7 @@ import (
 	"github.com/google/renameio"
 	"github.com/google/shlex"
 
-	"github.com/the-maldridge/emissary/pkg/secret"
+	"github.com/resinstack/emissary/pkg/secret"
 )
 
 var (

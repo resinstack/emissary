@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/secretsmanager"
 
-	"github.com/the-maldridge/emissary/pkg/secret"
+	"github.com/resinstack/emissary/pkg/secret"
 )
 
 type awssm struct {

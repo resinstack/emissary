@@ -7,11 +7,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/the-maldridge/emissary/pkg/secret"
-	"github.com/the-maldridge/emissary/pkg/tmpl"
+	"github.com/resinstack/emissary/pkg/secret"
+	"github.com/resinstack/emissary/pkg/tmpl"
 
-	_ "github.com/the-maldridge/emissary/pkg/secret/awssm"
-	_ "github.com/the-maldridge/emissary/pkg/secret/insecure"
+	_ "github.com/resinstack/emissary/pkg/secret/awssm"
+	_ "github.com/resinstack/emissary/pkg/secret/insecure"
 )
 
 func doTemplate(path string, wg *sync.WaitGroup) {

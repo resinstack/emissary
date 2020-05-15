@@ -1,4 +1,4 @@
-module github.com/the-maldridge/emissary
+module github.com/resinstack/emissary
 
 go 1.14
 
