@@ -1,4 +1,4 @@
-FROM golang:alpine3.11 as build
+FROM golang:alpine3.12 as build
 RUN mkdir -p /go/emissary && \
         apk add upx
 COPY ./ /go/emissary
