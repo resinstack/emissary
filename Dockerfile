@@ -9,10 +9,7 @@ RUN cd /go/emissary && \
         upx /emissary && \
         ls -alh /emissary
 
-FROM alpine:latest as certs
-RUN apk --update add ca-certificates
-
-FROM scratch
+FROM alpine:3.12
+RUN apk add --no-cache ca-certificates
 COPY --from=build /emissary /
-COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 CMD ["/emissary"]
