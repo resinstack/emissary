@@ -12,4 +12,4 @@ RUN cd /go/emissary && \
 FROM alpine:3.12
 RUN apk add --no-cache ca-certificates
 COPY --from=build /emissary /
-CMD ["/emissary"]
+ENTRYPOINT ["/emissary"]
