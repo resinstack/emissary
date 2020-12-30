@@ -10,6 +10,7 @@ RUN cd /go/emissary && \
         ls -alh /emissary
 
 FROM alpine:3.12
+LABEL org.opencontainers.image.source https://github.com/resinstack/emissary
 RUN apk add --no-cache ca-certificates
 COPY --from=build /emissary /
 ENTRYPOINT ["/emissary"]
