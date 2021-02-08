@@ -2,6 +2,8 @@ package insecure
 
 import (
 	"errors"
+	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -24,15 +26,22 @@ func init() {
 
 func initialize() (secret.Provider, error) {
 	i := new(insecure)
-	base := os.Getenv("INSECURE_BASE")
-	if base == "" {
-		return nil, errors.New("required variable INSECURE_BASE not set, insecure engine will be unavailable")
+	urlfile := os.Getenv("EMISSARY_INSECURE_URLFILE")
+	if urlfile == "" {
+		return nil, errors.New("required variable EMISSARY_INSECURE_URLFILE not set, insecure engine will be unavailable")
 	}
-	var err error
-	i.base, err = url.Parse(base)
+
+	base, err := ioutil.ReadFile(urlfile)
 	if err != nil {
-		return nil, errors.New("INSECURE_BASE does not container a URL, insecure engine will be unavailable")
+		return nil, errors.New(urlfile + " is not readable")
 	}
+	baseS := strings.TrimSpace(string(base[:]))
+
+	i.base, err = url.Parse(baseS)
+	if err != nil {
+		return nil, errors.New(baseS + " is not a URL, insecure engine will be unavailable")
+	}
+	log.Println("Insecure Secrets engine is initialized and available")
 	return i, nil
 }
 
