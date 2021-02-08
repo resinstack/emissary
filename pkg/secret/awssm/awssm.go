@@ -35,6 +35,7 @@ func initialize() (secret.Provider, error) {
 	x := new(awssm)
 	x.sm = secretsmanager.New(s)
 
+	log.Println("AWS SM engine is initialized and available")
 	return x, nil
 }
 
