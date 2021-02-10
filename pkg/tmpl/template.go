@@ -3,7 +3,9 @@ package tmpl
 import (
 	"io/ioutil"
 	"log"
+	"os"
 	"os/exec"
+	"path/filepath"
 	"text/template"
 
 	"github.com/ericaro/frontmatter"
@@ -48,6 +50,10 @@ func Parse(f string) (*Tmpl, error) {
 // Render spits out the contents of the template and renders it to a
 // file on disk.
 func (t *Tmpl) Render() error {
+	if err := os.MkdirAll(filepath.Dir(t.Dest), 0755); err != nil {
+		return err
+	}
+
 	f, err := renameio.TempFile("", t.Dest)
 	if err != nil {
 		return err
